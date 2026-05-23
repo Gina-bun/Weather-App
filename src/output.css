@@ -214,6 +214,18 @@
     width: calc(var(--spacing) * 2.5);
     height: calc(var(--spacing) * 2.5);
   }
+  .size-6 {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+  }
+  .size-25 {
+    width: calc(var(--spacing) * 25);
+    height: calc(var(--spacing) * 25);
+  }
+  .size-65 {
+    width: calc(var(--spacing) * 65);
+    height: calc(var(--spacing) * 65);
+  }
   .w-2xl {
     width: var(--container-2xl);
   }

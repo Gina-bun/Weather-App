@@ -14,20 +14,19 @@
   <body>
     <div class="container flex flex-col gap-3 items-center p-3">
       <div class="search flex border">
-        <input type="text" />
-        <span class="material-symbols-outlined self-end m-auto"> search </span>
+        <input type="text" id="search-input" />
+        <span class="material-symbols-outlined self-end m-auto" id="search-icon"> search </span>
       </div>
 
-      <h1>Country</h1>
+      <h1 id="location"></h1>
 
-      <span class="material-symbols-outlined" style="font-size: 98px;"> sunny </span>
+      <img id="weather-icon" src="" class="size-65"></img>
 
-      <p>Weather</p>
-      <p>Day of the week</p>
-      <p>Temperature</p>
-      <p>Humidity</p>
+      <p id="weather-desc"></p>
+      <p id="day"></p>
+      <p id="temperature"></p>
+      <p id="humidity"></p>
 
-      <i data-lucide="menu" class="size-2.5"></i>
 
       <script src="./script.js"></script>
     </div>
