@@ -247,8 +247,14 @@
   .items-end {
     align-items: flex-end;
   }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
   .gap-3 {
     gap: calc(var(--spacing) * 3);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
   }
   .place-self-center {
     place-self: center;
@@ -278,6 +284,9 @@
   }
   .p-3 {
     padding: calc(var(--spacing) * 3);
+  }
+  .text-center {
+    text-align: center;
   }
   .align-middle {
     vertical-align: middle;

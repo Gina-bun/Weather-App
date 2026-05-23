@@ -5,7 +5,10 @@ const weatherIcon = document.getElementById("weather-icon");
 const weatherDescription = document.getElementById("weather-desc");
 const temperature = document.getElementById("temperature");
 const day = document.getElementById("day");
-const humidity = document.getElementById("humidity");
+
+const humidity = document.getElementById("humidity")
+const pressure = document.getElementById("pressure")
+const windSpeed = document.getElementById("wind-speed")
 
 async function getWeather(city) {
   const apiKey = "8038ecd13485738574daee006d794fac";
@@ -22,6 +25,8 @@ async function getWeather(city) {
       weatherIcon.src = ""
       day.textContent = ""
       humidity.textContent = ""
+      windSpeed.textContent = ""
+      pressure.textContent = ""
 
       return
     }
@@ -42,12 +47,15 @@ function displayWeather(data) {
   weatherDescription.textContent = data.weather[0].description;
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   day.textContent = `${weekDay}`;
-  humidity.textContent = `Humidity: ${data.main.humidity}%`;
+  humidity.innerHTML = `Humidity <br/> ${data.main.humidity}%`;
+  windSpeed.innerHTML = `Wind Speed <br/> ${data.wind.speed} m/s`;
+  pressure.innerHTML = `Pressure <br/> ${data.main.pressure} hPa`;
 }
 
 searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     const city = e.target.value;
     getWeather(city);
+    searchInput.value = ""
   }
 });
