@@ -10,6 +10,14 @@ const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
 const windSpeed = document.getElementById("wind-speed");
 
+//give weather of random city on page load
+const cities = ["New York", "London", "Tokyo", "Paris", "Sydney", "Accra", "Lagos", "Ouagadougou"];
+
+window.addEventListener("load", () => {
+    const randomCity = cities[Math.floor(Math.random() * cities.length)]
+    getWeather(randomCity)
+})
+
 async function getWeather(city) {
   const apiKey = "8038ecd13485738574daee006d794fac";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
