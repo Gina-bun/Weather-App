@@ -1,5 +1,9 @@
 const searchInput = document.getElementById("search-input");
 const searchIcon = document.getElementById("search-icon");
+
+const weatherContainer = document.getElementById("weather-result");
+const loadingSkeleton = document.getElementById("skeleton");
+
 const currentLocation = document.getElementById("location");
 const weatherIcon = document.getElementById("weather-icon");
 const weatherDescription = document.getElementById("weather-desc");
@@ -11,20 +15,44 @@ const pressure = document.getElementById("pressure");
 const windSpeed = document.getElementById("wind-speed");
 
 //give weather of random city on page load
-const cities = ["New York", "London", "Tokyo", "Paris", "Sydney", "Accra", "Lagos", "Ouagadougou"];
+const cities = [
+  "New York",
+  "London",
+  "Tokyo",
+  "Paris",
+  "Sydney",
+  "Accra",
+  "Lagos",
+  "Ouagadougou",
+];
 
 window.addEventListener("load", () => {
-    const randomCity = cities[Math.floor(Math.random() * cities.length)]
-    getWeather(randomCity)
-})
+  const randomCity = cities[Math.floor(Math.random() * cities.length)];
+  getWeather(randomCity);
+});
 
 async function getWeather(city) {
   const apiKey = "8038ecd13485738574daee006d794fac";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   try {
+    //show skeleton while fetching weather data
+    let loadingWeather = true;
+    if (loadingWeather) {
+      weatherContainer.style.display = "none";
+      loadingSkeleton.style.display = "flex";
+    } 
+
     const response = await fetch(url);
     const data = await response.json();
+
+    //hide skeleton when data is done fetching
+    loadingWeather = false;
+    if(!loadingWeather){
+      weatherContainer.style.display = "flex";
+      loadingSkeleton.style.display = "none";
+    }
+    
 
     if (data.cod === "404") {
       currentLocation.textContent = "City not found";

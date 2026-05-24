@@ -11,12 +11,15 @@
 
     <title>Weather App</title>
   </head>
-  <body>
-    <div class="container flex flex-col gap-4 items-center px-8 py-6 bg-sky-800 h-screen text-gray-300">
-      <div class="search flex border rounded-sm p-2 w-full">
+  <body class=" bg-sky-800 px-8 pt-6">
+     <div class="search flex border rounded-sm p-2 w-full text-gray-300" >
         <input type="text" id="search-input"  class="outline-none w-full" placeholder="search a city..."/>
         <span class="material-symbols-outlined self-end m-auto" id="search-icon"> search </span>
       </div>
+
+    <div id="weather-result" class="container flex flex-col gap-4 items-center pb-6 pt-5 bg-sky-800 h-fit text-gray-300">
+     
+      
 
       <h1 id="location" class="text-3xl"></h1>
 
@@ -34,7 +37,19 @@
      
 
 
-      <script src="./script.js"></script>
     </div>
+
+    <div id="skeleton" class="skeleton hidden flex-col items-center gap-4 py-3">
+         <div class="skeleton-icon animate-pulse bg-gray-400 rounded w-30 h-6"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded-full w-40 h-40 mt-4"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded w-40 h-7 mt-2"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded w-80 h-8 mt-2"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded w-80 h-10 mt-2"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded w-80 h-8 mt-2"></div>
+         <div class="skeleton-text animate-pulse bg-gray-400 rounded w-80 h-24 mt-2"></div>
+    </div>
+
+          <script src="./script.js"></script>
+
   </body>
 </html>
