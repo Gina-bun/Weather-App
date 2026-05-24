@@ -6,9 +6,9 @@ const weatherDescription = document.getElementById("weather-desc");
 const temperature = document.getElementById("temperature");
 const day = document.getElementById("day");
 
-const humidity = document.getElementById("humidity")
-const pressure = document.getElementById("pressure")
-const windSpeed = document.getElementById("wind-speed")
+const humidity = document.getElementById("humidity");
+const pressure = document.getElementById("pressure");
+const windSpeed = document.getElementById("wind-speed");
 
 async function getWeather(city) {
   const apiKey = "8038ecd13485738574daee006d794fac";
@@ -19,22 +19,22 @@ async function getWeather(city) {
     const data = await response.json();
 
     if (data.cod === "404") {
-      currentLocation.textContent = "City not found"
-      temperature.textContent = ""
-      weatherDescription.textContent = ""
-      weatherIcon.src = ""
-      day.textContent = ""
-      humidity.textContent = ""
-      windSpeed.textContent = ""
-      pressure.textContent = ""
+      currentLocation.textContent = "City not found";
+      temperature.textContent = "";
+      weatherDescription.textContent = "";
+      weatherIcon.src = "";
+      day.textContent = "";
+      humidity.textContent = "";
+      windSpeed.textContent = "";
+      pressure.textContent = "";
 
-      return
+      return;
     }
 
     //display weather when fetch succeeds
     displayWeather(data);
   } catch (e) {
-    console.error("Error fetching weather: ", e)
+    console.error("Error fetching weather: ", e);
   }
 }
 
@@ -47,15 +47,21 @@ function displayWeather(data) {
   weatherDescription.textContent = data.weather[0].description;
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   day.textContent = `${weekDay}`;
-  humidity.innerHTML = `Humidity <br/> ${data.main.humidity}%`;
-  windSpeed.innerHTML = `Wind Speed <br/> ${data.wind.speed} m/s`;
-  pressure.innerHTML = `Pressure <br/> ${data.main.pressure} hPa`;
+  humidity.innerHTML = `<span class="material-symbols-outlined">
+cool_to_dry
+</span>Humidity <br/> ${data.main.humidity}%`;
+  windSpeed.innerHTML = `<span class="material-symbols-outlined">
+air
+</span>Wind Speed <br/> ${data.wind.speed} m/s`;
+  pressure.innerHTML = `<span class="material-symbols-outlined">
+compare_arrows
+</span>Pressure <br/> ${data.main.pressure} hPa`;
 }
 
 searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     const city = e.target.value;
     getWeather(city);
-    searchInput.value = ""
+    searchInput.value = "";
   }
 });

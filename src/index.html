@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search,sunny"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link href="./output.css" rel="stylesheet" />
 
     <title>Weather App</title>
   </head>
   <body>
-    <div class="container flex flex-col gap-3 items-center p-3">
-      <div class="search flex border">
-        <input type="text" id="search-input" />
+    <div class="container flex flex-col gap-4 items-center p-3 py-6">
+      <div class="search flex border rounded-sm p-2">
+        <input type="text" id="search-input"  class="outline-none " placeholder="search a city..."/>
         <span class="material-symbols-outlined self-end m-auto" id="search-icon"> search </span>
       </div>
 
-      <h1 id="location" class="text-2xl"></h1>
+      <h1 id="location" class="text-3xl"></h1>
 
       <img id="weather-icon" src="" class="size-65"></img>
 
-      <p id="weather-desc"></p>
-      <p id="day"></p>
-      <p id="temperature"></p>
+      <p id="weather-desc" class="text-xl"></p>
+      <p id="day" class="text-xl"></p>
+      <p id="temperature" class="text-5xl"></p>
 
-      <div class="weather-details flex gap-5 text-center">
+      <div class="weather-details flex justify-between gap-7 text-center">
          <p id="humidity"></p>
          <p id="pressure"></p>
          <p id="wind-speed"></p>
