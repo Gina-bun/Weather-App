@@ -51,7 +51,7 @@ function displayWeather(data) {
   const weekDay = today.toLocaleDateString("en-US", { weekday: "long" });
 
   currentLocation.textContent = `${data.name}`;
-  temperature.textContent = `${data.main.temp}°C`;
+  temperature.textContent = `${Math.round(data.main.temp)}°C`;
   weatherDescription.textContent = data.weather[0].description;
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   day.textContent = `${weekDay}`;
