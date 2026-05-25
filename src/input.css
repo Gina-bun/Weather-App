@@ -1,5 +1,8 @@
 @import "tailwindcss";
+@source "./index.html";
+@source "./script.js";
 
 #wind-speed , #pressure, #humidity{
     @apply flex flex-col items-center
 }
+

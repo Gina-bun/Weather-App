@@ -1,6 +1,8 @@
 const searchInput = document.getElementById("search-input");
 const searchIcon = document.getElementById("search-icon");
 
+const inputValidationMessage = document.getElementById("inputValidationMessage")
+
 const weatherContainer = document.getElementById("weather-result");
 const loadingSkeleton = document.getElementById("skeleton");
 
@@ -32,16 +34,20 @@ window.addEventListener("load", () => {
 });
 
 async function getWeather(city) {
+  
   const apiKey = "8038ecd13485738574daee006d794fac";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   try {
     //show skeleton while fetching weather data
     let loadingWeather = true;
+
     if (loadingWeather) {
       weatherContainer.style.display = "none";
       loadingSkeleton.style.display = "flex";
     } 
+
+    validateInput(city)
 
     const response = await fetch(url);
     const data = await response.json();
@@ -58,7 +64,7 @@ async function getWeather(city) {
       currentLocation.textContent = "City not found";
       temperature.textContent = "";
       weatherDescription.textContent = "";
-      weatherIcon.src = "";
+      weatherIcon.src = `https://i.pinimg.com/736x/1e/2a/ab/1e2aab34c103fdaaca4855e283064f5a.jpg`;
       day.textContent = "";
       humidity.textContent = "";
       windSpeed.textContent = "";
@@ -69,8 +75,17 @@ async function getWeather(city) {
 
     //display weather when fetch succeeds
     displayWeather(data);
+
   } catch (e) {
-    console.error("Error fetching weather: ", e);
+      console.error("Error fetching weather: ", e);
+      currentLocation.textContent = "City not found";
+      temperature.textContent = "";
+      weatherDescription.textContent = "";
+      weatherIcon.src = `https://i.pinimg.com/736x/1e/2a/ab/1e2aab34c103fdaaca4855e283064f5a.jpg`;
+      day.textContent = "";
+      humidity.textContent = "";
+      windSpeed.textContent = "";
+      pressure.textContent = "";
   }
 }
 
@@ -94,9 +109,37 @@ compare_arrows
 </span>Pressure <br/> ${data.main.pressure} hPa`;
 }
 
+function validateInput(input){
+  if(input === ""){
+    inputValidationMessage.classList.remove("invisible")
+    inputValidationMessage.textContent = "Please enter a city name"
+    console.log(inputValidationMessage.innerText)
+    return
+  }
+
+  if(!/^[a-zA-Z]+$/.test(input)){
+    inputValidationMessage.classList.remove("invisible")
+    inputValidationMessage.textContent = "Please enter a valid city name"
+    console.log(inputValidationMessage.innerText)
+    return
+  }
+
+  if(input.length < 3){
+    inputValidationMessage.classList.remove("invisible")
+    inputValidationMessage.textContent = "Please enter a valid city name"
+    console.log(inputValidationMessage.innerText)
+    return
+  }
+
+  inputValidationMessage.classList.add("invisible")
+  console.log(inputValidationMessage.innerText)
+}
+
 searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     const city = e.target.value;
+
+
     getWeather(city);
     searchInput.value = "";
   }

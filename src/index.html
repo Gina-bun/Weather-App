@@ -11,19 +11,22 @@
 
     <title>Weather App</title>
   </head>
-  <body class=" bg-sky-800 px-8 pt-6">
+  <body class=" bg-pink-900 px-8 pt-6">
+    <!-- Search input -->
      <div class="search flex border rounded-sm p-2 w-full text-gray-300" >
         <input type="text" id="search-input"  class="outline-none w-full" placeholder="search a city..."/>
         <span class="material-symbols-outlined self-end m-auto" id="search-icon"> search </span>
       </div>
+      <p id="inputValidationMessage" class="text-orange-200 pl-3 text-[12px] invisible" >Please enter a city name</p>
 
-    <div id="weather-result" class="container flex flex-col gap-4 items-center pb-6 pt-5 bg-sky-800 h-fit text-gray-300">
+      <!-- Weather Result -->
+    <div id="weather-result" class="container flex flex-col gap-4 items-center pb-3 pt-5 h-fit text-gray-300">
      
       
 
-      <h1 id="location" class="text-3xl"></h1>
+      <h1 id="location" class="text-3xl text-extrabold"></h1>
 
-      <img id="weather-icon" src="" class="size-65"></img>
+      <img id="weather-icon" src="" class="size-65 -mb-8"></img>
 
       <p id="weather-desc" class="text-xl"></p>
       <p id="day" class="text-xl"></p>
