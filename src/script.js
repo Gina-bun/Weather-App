@@ -16,8 +16,43 @@ const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
 const windSpeed = document.getElementById("wind-speed");
 
-//give weather of random city on page load
-const cities = [
+
+
+window.addEventListener("load", () => {
+
+ //note that getCurrentPosition has 3 parameters (success callback, error callback and options object)
+ if(navigator.geolocation){
+  //success callback 
+     navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude
+      const lon = position.coords.longitude
+
+      await getWeatherByCoords(lat, lon)
+     },
+     //error callback
+    ()=> {
+       //give weather of random city on page load
+   getRandomCity()
+   console.log("geolocation not supported")
+    })
+ }
+
+});
+
+//get current location lat and lon coordinates
+async function getWeatherByCoords(lat, lon){
+  const apiKey = "8038ecd13485738574daee006d794fac";
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+
+  const response = await fetch(url)
+  const data = await response.json()
+
+  displayWeather(data)
+}
+
+//get random city 
+function getRandomCity(){
+   const cities = [
   "New York",
   "London",
   "Tokyo",
@@ -28,11 +63,13 @@ const cities = [
   "Ouagadougou",
 ];
 
-window.addEventListener("load", () => {
   const randomCity = cities[Math.floor(Math.random() * cities.length)];
   getWeather(randomCity);
-});
+ 
 
+}
+
+//get weather data from api
 async function getWeather(city) {
   
   const apiKey = "8038ecd13485738574daee006d794fac";
@@ -76,8 +113,8 @@ async function getWeather(city) {
     //display weather when fetch succeeds
     displayWeather(data);
 
-  } catch (e) {
-      console.error("Error fetching weather: ", e);
+  } catch(e) {
+      //console.error("Error fetching weather: ", e);
       currentLocation.textContent = "City not found";
       temperature.textContent = "";
       weatherDescription.textContent = "";
@@ -113,26 +150,26 @@ function validateInput(input){
   if(input === ""){
     inputValidationMessage.classList.remove("invisible")
     inputValidationMessage.textContent = "Please enter a city name"
-    console.log(inputValidationMessage.innerText)
+    //console.log(inputValidationMessage.innerText)
     return
   }
 
   if(!/^[a-zA-Z]+$/.test(input)){
     inputValidationMessage.classList.remove("invisible")
     inputValidationMessage.textContent = "Please enter a valid city name"
-    console.log(inputValidationMessage.innerText)
+   // console.log(inputValidationMessage.innerText)
     return
   }
 
   if(input.length < 3){
     inputValidationMessage.classList.remove("invisible")
     inputValidationMessage.textContent = "Please enter a valid city name"
-    console.log(inputValidationMessage.innerText)
+    //console.log(inputValidationMessage.innerText)
     return
   }
 
   inputValidationMessage.classList.add("invisible")
-  console.log(inputValidationMessage.innerText)
+  //console.log(inputValidationMessage.innerText)
 }
 
 searchInput.addEventListener("keypress", (e) => {
