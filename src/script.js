@@ -45,8 +45,18 @@ async function getWeatherByCoords(lat, lon){
   const apiKey = "8038ecd13485738574daee006d794fac";
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
 
+  //show skeleton while fetching weather data
+      weatherContainer.style.display = "none";
+      loadingSkeleton.style.display = "flex";
+    
+
   const response = await fetch(url)
   const data = await response.json()
+
+   //hide skeleton when data is done fetching
+      weatherContainer.style.display = "flex";
+      loadingSkeleton.style.display = "none";
+    
 
   displayWeather(data)
 }
@@ -80,10 +90,10 @@ async function getWeather(city) {
     //show skeleton while fetching weather data
     let loadingWeather = true;
 
-    if (loadingWeather) {
+    
       weatherContainer.style.display = "none";
       loadingSkeleton.style.display = "flex";
-    } 
+    
 
     validateInput(city)
 
@@ -91,15 +101,14 @@ async function getWeather(city) {
     const data = await response.json();
 
     //hide skeleton when data is done fetching
-    loadingWeather = false;
-    if(!loadingWeather){
       weatherContainer.style.display = "flex";
       loadingSkeleton.style.display = "none";
-    }
+    
     
 
     if (data.cod === "404") {
       currentLocation.textContent = "City not found";
+      time.textContent = ""
       temperature.textContent = "";
       weatherDescription.textContent = "";
       weatherIcon.src = `https://i.pinimg.com/736x/1e/2a/ab/1e2aab34c103fdaaca4855e283064f5a.jpg`;
@@ -117,6 +126,7 @@ async function getWeather(city) {
   } catch(e) {
       //console.error("Error fetching weather: ", e);
       currentLocation.textContent = "City not found";
+      time.textContent = ""; 
       temperature.textContent = "";
       weatherDescription.textContent = "";
       weatherIcon.src = `https://i.pinimg.com/736x/1e/2a/ab/1e2aab34c103fdaaca4855e283064f5a.jpg`;
