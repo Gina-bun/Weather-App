@@ -7,6 +7,7 @@ const weatherContainer = document.getElementById("weather-result");
 const loadingSkeleton = document.getElementById("skeleton");
 
 const currentLocation = document.getElementById("location");
+const time = document.getElementById("time")
 const weatherIcon = document.getElementById("weather-icon");
 const weatherDescription = document.getElementById("weather-desc");
 const temperature = document.getElementById("temperature");
@@ -131,6 +132,7 @@ function displayWeather(data) {
   const weekDay = today.toLocaleDateString("en-US", { weekday: "long" });
 
   currentLocation.textContent = `${data.name}`;
+  time.textContent = ` ${today.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})}`
   temperature.textContent = `${Math.round(data.main.temp)}°C`;
   weatherDescription.textContent = data.weather[0].description;
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
